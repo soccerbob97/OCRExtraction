@@ -17,13 +17,13 @@ To run the script, gcloud must be installed. Complete steps 1-5 in this tutorial
 To initialize the Google Cloud Functions, create the Google Buckets, and Pub/Sub functions, run 
 
 ```
-bash excute.sh initializeGCloud
+bash excute.sh "your gcloud project id" initializeGCloud
 ```
 
 To extract the text values on an image, excute this image:
 
 ```
-bash excute.sh processPhoto filePath
+bash excute.sh "your gcloud project id" processPhoto "relative filePath of image"
 ```
 
 After this command,the utilityprocessedimages bucket will have the cropped images, and the utilityresults bucket will have the json file with the reformatted text. 

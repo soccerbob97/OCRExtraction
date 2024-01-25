@@ -1,5 +1,5 @@
 #!/bin/bash
-
+gcp_project=$1
 createBuckets() {
     gsutil mb gs://utilityimages
     gsutil mb gs://utilityprocessedimages
@@ -17,7 +17,7 @@ processImage() {
         --entry-point=process_image \
         --trigger-bucket utilityimages \
         --trigger-location=us \
-        --set-env-vars "^:^GCP_PROJECT=utilityocr-411814:RESIZE_NAME=UtilityResize:PROCESSED_BUCKET=utilityprocessedimages:RESULT_NAME=UtilityResults"
+        --set-env-vars "^:^GCP_PROJECT="$gcp_project":RESIZE_NAME=UtilityResize:PROCESSED_BUCKET=utilityprocessedimages:RESULT_NAME=UtilityResults"
 }
 
 saveResult() {
@@ -29,16 +29,15 @@ saveResult() {
         --source=. \
         --entry-point=save_result \
         --trigger-topic UtilityResults \
-        --set-env-vars "GCP_PROJECT=utilityocr-411814,RESULT_BUCKET=utilityresults"
+        --set-env-vars "GCP_PROJECT="$gcp_project",RESULT_BUCKET=utilityresults"
 }
-
-processName=$1
+processName=$2
 if [ "$processName" = "initializeGCloud" ]; then
     createBuckets
     processImage
     saveResult
 elif [ "$processName" = "processPhoto" ]; then
-    fileName=$2
+    fileName=$3
     if [[ -f "$fileName" ]]; then
         gsutil cp $fileName gs://utilityimages  
     else

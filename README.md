@@ -28,4 +28,4 @@ bash excute.sh processPhoto filePath
 
 After this command,the utilityprocessedimages bucket will have the cropped images, and the utilityresults bucket will have the json file with the reformatted text. 
 
-I was able to crop the desired parts of the image accurately. However, the OCR did not return accurate values all the time. For example, the OCR returned // instead of 11. In the json file, I displayed the raw OCR values. Unfortunately, I did not have time to fix this. If I had more time, I would focus on other OCR techniques to accurately extract the data. 
+I was able to crop the desired parts of the image accurately. However, the OCR did not return accurate values all the time. For example, the OCR returned // instead of 11. In the json file, I displayed the raw OCR values. Unfortunately, I did not have time to fix this. If I had more time, I would focus on other OCR techniques like fuzzy matching to accurately extract the data. Fuzzy matching would be useful here because the output is close to the expected output but not exact. I would use a distance metric like Levenshtein or Hamming Distance for fuzzy matching.
